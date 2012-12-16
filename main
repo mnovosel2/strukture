@@ -1,0 +1,369 @@
+#include<iostream>
+//#include "red_polje.h"
+#include "red_pokazivac.h"
+using namespace std;
+int posto;
+void ispis(klijent var){
+  cout<<"Ime i prezime: "<<var.ime_prez<<endl;
+  cout<<"Datum rodenja: "<<var.datum[0]<<"."<<var.datum[1]<<"."<<var.datum[2]<<endl;
+  cout<<"Vrijeme dolaska u red: "<<var.a<<endl;
+  cout<<"Vrijeme trajanja transakcije: "<<var.b<<endl;
+  cout<<"Prioritet: ";
+                    switch(var.c){
+                                        case 1:
+                                             cout<<"Umirovljenik "<<endl;
+                                        break;
+                                        case 2:
+                                               cout<<"Invalid "<<endl;
+                                        break;
+                                        case 3:
+                                             cout<<"Trudnica "<<endl;
+                                        break;
+                                        case 4:
+                                             cout<<"VIP klijent "<<endl;
+                                        break;
+                                        case  5:
+                                              cout<<"Ostali klijenti "<<endl;
+                                        break;
+                                        case 6:
+                                             cout<<"Nije klijent "<<endl;
+                                        break;}
+  cout<<"Vrsta transakcije: ";
+                  switch(var.d){
+                                        case 1:
+                                            cout<<"Uplata "<<endl;
+                                        break;
+                                        case 2:
+                                             cout<<"Isplata "<<endl;
+                                        break;
+                                        case 3:
+                                              cout<<"Placanje racuna "<<endl;
+                                        break;
+                                        case 4:
+                                               cout<<"Kredit "<<endl;
+                                        break;  
+                                        }
+  cout<<"Stanje na deviznom racunu: "<<var.devizni<<endl;   
+  cout<<"Stanje na tekucem racunu: "<<var.tekuci<<endl;
+  cout<<"-----------------------------------------"<<endl<<endl;
+}
+
+void generiranje(int &n, red *Q){
+                   klijent zapis;
+                   int br=0;  
+                 while(br<20){
+                          for(int i=0; i<5; i++){
+                                  zapis.d=1;
+                                  zapis.datum[2]=1981+i;                        
+                                  zapis.datum[0]=rand()%30+1;
+                                  zapis.datum[1]=rand()%12+1;
+                                  zapis.a=rand()%400+100;
+                                  zapis.c=4;
+                                  zapis.tekuci=98+i;
+                                  zapis.devizni=1000+rand()%1000;
+                                  zapis.b=rand()%400+100;  
+                                  zapis.ime_prez[0]=char(rand()%26+65);
+                                  for(int j=1; j<5; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[5]=' ';
+                                  zapis.ime_prez[6]=char(rand()%26+65);
+                                  for(int j=7; j<17; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[17]='\0';
+                                  EnQueueQ(zapis, Q);
+                                  br++;     
+                                  }
+                        for(int i=5; i<10; i++){  
+                                  zapis.d=2;
+                                  zapis.datum[2]=1930+i;                        
+                                  zapis.datum[0]=rand()%30+1;
+                                  zapis.datum[1]=rand()%12+1;
+                                  zapis.a=rand()%400+100;
+                                  zapis.c=1;
+                                  zapis.tekuci=4998+i;
+                                  zapis.devizni=1000+rand()%1000;
+                                  zapis.b=rand()%400+100;  
+                                  zapis.ime_prez[0]=char(rand()%26+65);
+                                  for(int j=1; j<5; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[5]=' ';
+                                  zapis.ime_prez[6]=char(rand()%26+65);
+                                  for(int j=7; j<17; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[17]='\0';
+                                  EnQueueQ(zapis, Q);
+                                  br++;     
+                        }
+                   
+                          for(int i=10; i<15; i++){  
+                                  zapis.d=3;
+                                  zapis.datum[2]=1981+i;                        
+                                  zapis.datum[0]=rand()%30+1;
+                                  zapis.datum[1]=rand()%12+1;
+                                  zapis.a=rand()%400+100;
+                                  zapis.c=rand()%6+1;
+                                  
+                                  zapis.tekuci=3200+i;
+                                  zapis.devizni=1000+rand()%1000;
+                                  zapis.b=rand()%400+100;  
+                                  zapis.ime_prez[0]=char(rand()%26+65);
+                                  for(int j=1; j<5; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[5]=' ';
+                                  zapis.ime_prez[6]=char(rand()%26+65);
+                                  for(int j=7; j<17; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[17]='\0';
+                                  EnQueueQ(zapis, Q);
+                                  br++;     
+                        }
+                        for(int i=15; i<20; i++){  
+                                  zapis.d=4;
+                                  zapis.datum[2]=1981+i;                        
+                                  zapis.datum[0]=rand()%30+1;
+                                  zapis.datum[1]=rand()%12+1;
+                                  zapis.a=rand()%400+100;
+                                 do{
+                                  zapis.c=rand()%6+1;
+                                  }while(zapis.c==6);
+                                  zapis.tekuci=3200+i;
+                                  zapis.devizni=1000+rand()%1000;
+                                  zapis.b=rand()%400+100;  
+                                   zapis.ime_prez[0]=char(rand()%26+65);
+                                  for(int j=1; j<5; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[5]=' ';
+                                  zapis.ime_prez[6]=char(rand()%26+65);
+                                  for(int j=7; j<17; j++)
+                                          zapis.ime_prez[j]=char(rand()%26+97);
+                                  zapis.ime_prez[17]='\0';
+                                  EnQueueQ(zapis, Q);
+                                  br++;     
+                        }
+                        
+                  
+                  }
+                  
+                  
+                  if(br>=20){
+                   for(int i=br; i<n; i++){
+                          zapis.ime_prez[0]=char(rand()%26+65);
+                          for(int j=1; j<5; j++)
+                                  zapis.ime_prez[j]=char(rand()%26+97);
+                          zapis.ime_prez[5]=' ';
+                          zapis.ime_prez[6]=char(rand()%26+65);
+                          for(int j=7; j<17; j++)
+                                  zapis.ime_prez[j]=char(rand()%26+97);
+                           zapis.ime_prez[17]='\0';
+                           zapis.datum[2]=1981+i;                        
+                           zapis.datum[0]=rand()%30+1;
+                           zapis.datum[1]=rand()%12+1;
+                           zapis.tekuci=3700+i;
+                           zapis.devizni=1000+rand()%1000;
+                           zapis.a=rand()%400+100;
+                           zapis.b=rand()%400+100;
+                           zapis.c=rand()%6+1;
+                           do{
+                           zapis.d=rand()%4+1;   
+                           }while(zapis.c==6 && zapis.d!=3 && zapis.d!=1);
+                           EnQueueQ(zapis, Q);   
+                   }
+                   }
+}
+void dodaj(red *Q, red *treci,int &n){
+  int c=0,ci=1,k=1;;
+  generiranje(n,Q);
+  klijent var;
+  cout<<endl<<"Klijenti sa vise od 10000 kn na deviznom racunu (u australskom dolaru, srednji tecaj 6.08 ) "<<endl<<endl;
+  cout<<"------------------------------------------------"<<endl;
+  do{
+            if(k<=n){
+            var=FrontQ(Q);
+            if(var.c==ci ){
+                         if(var.devizni*6.08>10000){
+                                          ispis(var);          
+                                          }
+                          EnQueueQ(var,treci);
+                          DeQueueQ(Q);
+                          k++;
+                          }    
+                    
+              else{
+                  
+                   EnQueueQ(var,Q);
+                   DeQueueQ(Q);
+                  k++;
+                  }      
+                  }
+            else{
+                 k=1;
+                 ci++;
+                 }        
+  
+}while(!isEmptyQ(Q));
+
+}
+void brzi(red *treci,red *pom,int &n){
+     int ci=1, k=1,broj=n,num=0,i=1;
+     klijent var;
+     do{
+            if(k<=n){
+            var=FrontQ(treci);
+            if(var.c==ci && var.d==3){
+                          EnQueueQ(var,pom);
+                          DeQueueQ(treci);
+                          broj--;
+                          num++;
+                          n--;
+                          k++;
+                          }    
+                    
+              else{
+                  
+                   EnQueueQ(var,treci);
+                   DeQueueQ(treci);
+                  k++;
+                  }      
+                  }
+            else{
+                 k=1;
+                 ci++;
+                 }        
+  
+     
+     }while(ci<7);
+     k=0;
+     while(k<num){
+                  var=FrontQ(treci);
+                  EnQueueQ(var,treci);
+                  DeQueueQ(treci);
+                  k++;
+                  }
+cout<<"****Stanje na glavnom redu**** "<<endl<<endl;
+while(i<=broj){
+   var=FrontQ(treci);            
+   EnQueueQ(var,treci);
+   ispis(var);  
+   DeQueueQ(treci);   
+   i++;               
+}
+i=1;
+cout<<"****Stanje na brzom redu**** "<<endl<<endl;
+while(i<=num){
+   var=FrontQ(pom);
+                
+   EnQueueQ(var,pom);
+    ispis(var);  
+   DeQueueQ(pom);   
+   i++;              
+}
+}
+void VIP(red *treci,int &n){
+     int ci=1, k=1,starost,num=0,i=1;
+     klijent var;
+     do{
+          if(k<=n){
+                   var=FrontQ(treci);
+                   starost=2012-var.datum[2];
+                   if(var.c==4 && starost<30 && var.d==1 && var.tekuci<100){
+                      DeQueueQ(treci);         
+                      n--;     
+                      k++;
+                      num++;
+                   }
+                   if(var.c==1 && var.tekuci>5000){
+                               DeQueueQ(treci);
+                               n--;
+                               k++;
+                               num++;
+                   }
+                   else{
+                        EnQueueQ(var,treci);
+                        DeQueueQ(treci);
+                        k++;     
+                   }
+                   }       
+          else{
+               ci++;
+               k=1;
+          }        
+     }while(ci<7);
+ while(k<num){
+                  var=FrontQ(treci);
+                  EnQueueQ(var,treci);
+                  DeQueueQ(treci);
+                  k++;
+                  }
+ while(i<n){
+   var=FrontQ(treci);                    
+   EnQueueQ(var,treci);
+    ispis(var); 
+   DeQueueQ(treci);   
+   i++;               
+}
+}
+void salter(red *treci, red *salter2, int n){
+    if(n==0)
+                       return;
+     klijent zapis;
+     zapis=FrontQ(treci);
+     DeQueueQ(treci);
+     if(n>posto)
+                   EnQueueQ(zapis,treci);
+    salter(treci,salter2,n-1);
+    if(posto>0) {
+                   EnQueueQ(zapis,salter2);
+                   posto--;
+                   }
+                   
+   
+}
+int main(){
+int izbor,n;
+srand(time(0));
+rand();
+cout<<"Unesite N (N-u se pridodaje 20 zbog drugih dijelova zadatka): "<<endl;
+cin>>n;
+n+=20;
+red *Q=InitQ(Q); 
+red *pom=InitQ(pom);
+red *treci=InitQ(treci);
+red *salter2=InitQ(salter2);
+do{
+    cout<<"1. Generiranje atributa klijenata i dodavanje klijenata u red \n2. Stavljanje klijenata koji placaju racun u brzi red\n3. Brisanje VIP klijenata i umirovljenika\n4. Rekurzivno stavljanje klijenata na brzi red\n0. Kraj\n";
+    cin>>izbor;
+    switch(izbor){
+                
+                  case 1:
+                       dodaj(Q,treci,n);
+                  break;  
+                  case 2:
+                       brzi(treci,pom,n);
+                   break;        
+                   case 3:
+                          VIP(treci,n);
+                   break;
+                   case 4:{
+                        posto=(n*30)/100;
+                        salter(treci, salter2, n);
+                        cout<<"***Stanje na glavnom redu*** "<<endl<<endl;;
+                        while(!isEmptyQ(treci)){
+                         
+                            klijent var;
+                            var=FrontQ(treci);
+                            ispis(var);
+                            DeQueueQ(treci);
+                            }
+                        cout<<"***Stanje na salteru*** "<<endl<<endl;;
+                         while(!isEmptyQ(salter2)) {
+                            klijent var;
+                            var=FrontQ(salter2);
+                            ispis(var);
+                            DeQueueQ(salter2);
+                            }
+                            }
+                   break;
+    }
+}while(izbor!=0); 
+return 0;
+}
