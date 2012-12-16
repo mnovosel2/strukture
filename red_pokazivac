@@ -1,0 +1,50 @@
+struct klijent{
+               char ime_prez[35];
+               int datum[3];
+               float tekuci;
+               float devizni;
+               int a,b,c,d;    
+};
+struct q{
+       klijent vrijednost;
+       q *sljedeci;
+};
+struct red{
+       q *front, *rear;
+};
+red *InitQ(red *Q){
+               Q=new red;
+               q *element=new q;
+               Q->front=element;
+               Q->rear=element;
+               return Q;
+}
+int isEmptyQ(red *Q){
+    if(Q->front==Q->rear)
+                         return 1;
+    else
+        return 0;
+}
+klijent FrontQ(red *Q){
+        if(isEmptyQ(Q))
+                    std::cout<<"Red je prazan "<<std::endl;
+        else{
+            return Q->front->sljedeci->vrijednost;  
+        }
+}
+void EnQueueQ(klijent x, red *Q){
+     q *novi=new q;
+     novi->vrijednost=x;
+     q *zadnji=Q->rear;
+     zadnji->sljedeci=novi;
+     Q->rear=novi;
+}
+void DeQueueQ(red *Q){
+      if(isEmptyQ(Q))
+                                std::cout<<"Red je prazan "<<std::endl;
+      else{
+                  q *pocetni=Q->front;
+                  Q->front=pocetni->sljedeci;
+                  delete pocetni;
+                  }
+}
